@@ -18,7 +18,7 @@ class HBNBCommand(cmd.Cmd):
         return True
 
     def do_EOF(self, line):
-        """If EOF arg is indicated this method returns 'True'
+        """If EOF argument is indicated this method returns 'True'
         e.g if Ctr-D is passed to the line arg from the keyboard:
             EOF command to exit the program"""
         return True
