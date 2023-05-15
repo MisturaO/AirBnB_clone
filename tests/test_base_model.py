@@ -19,7 +19,8 @@ class TestBaseModel_instances(unittest.TestCase):
     """Testing instantiations of the BaseModel class"""
 
     def test_number_of_arguments(self):
-        self.assertEqual(BaseModel, type(Basemodel()))
+        models_inst = BaseModel()
+        self.assertEqual(models_inst, len(BaseModel()))
 
     def test_new_instance_in_object(self):
         self.assertIn(BaseModel(), models.storage.all().values())
@@ -130,7 +131,7 @@ class TestBaseModel_save(unittest.TestCase):
 
     def test_save_with_args(self):
         model_inst = BaseModel()
-        with self.asseertRaises(TypeError):
+        with self.assertRaises(TypeError):
             model_inst.save(None)
 
     def test_file_updates_with_save(self):
