@@ -8,7 +8,7 @@ unittest classes:
 
 
 import unittest
-from models.base_model import BaseMosel
+from models.base_model import BaseModel
 import models
 from datetime import datetime
 import os
