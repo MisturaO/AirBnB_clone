@@ -15,11 +15,12 @@ objects to a JSON file
 Our console is built using the Python cmd module which has an inbuilt help
 function that explains what the various commands in the console does. The
 console begins with a prompt and instruction on how to navigate. Example:
-"<type help topic>"where topic is one of the commands listed. One can also
+"type help topic>" where topic is one of the commands listed. One can also
 type in any command without any help and the command will execute
 
 # Examples
 $ ./console.py
+
 (prompt) help create
 $ The create command builds an instance of a model
 
