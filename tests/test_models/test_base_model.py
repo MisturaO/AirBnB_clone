@@ -19,8 +19,7 @@ class TestBaseModel_instances(unittest.TestCase):
     """Testing instantiations of the 'BaseModel' class"""
 
     def test_number_of_arguments(self):
-        models_inst = BaseModel()
-        self.assertEqual(models_inst, len(BaseModel()))
+        self.assertEqual(BaseModel, type(BaseModel()))
 
     def test_new_instance_in_object(self):
         self.assertIn(BaseModel(), models.storage.all().values())
