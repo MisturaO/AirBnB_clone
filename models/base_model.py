@@ -66,11 +66,11 @@ class BaseModel():
         The class name is assigned to a key called __class__
         """
 
-        my_dict = self.__dict__.copy()
+        Mydict = self.__dict__.copy()
         timestr1 = self.created_at.strftime("%Y-%m-%dT%H:%M:%S.%f")
         timestr2 = self.updated_at.strftime("%Y-%m-%dT%H:%M:%S.%f")
 
-        my_dict["created_at"] = timestr1
-        my_dict["updated_at"] = timestr2
-        my_dict["__class__"] = self.__class__.__name__
-        return my_dict
+        Mydict["created_at"] = timestr1
+        Mydict["updated_at"] = timestr2
+        Mydict["__class__"] = self.__class__.__name__
+        return Mydict
