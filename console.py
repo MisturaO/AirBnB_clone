@@ -5,6 +5,7 @@ from models.base_model import BaseModel
 from models import storage
 from datetime import datetime
 
+
 class HBNBCommand(cmd.Cmd):
     """The command processor class definition:
         class attrs:
@@ -64,8 +65,8 @@ class HBNBCommand(cmd.Cmd):
             print("** class doesn't exist **")
 
     def do_destroy(self, line):
-        """Deletes an instance based on the class name and id
-        (save the change into the JSON file). Ex: 
+    """Deletes an instance based on the class name and id
+        (save the change into the JSON file). Ex:
             $ destroy BaseModel 1234-1234-1234."""
         args = line.split(" ")
         if len(args) == 1:
@@ -123,18 +124,17 @@ class HBNBCommand(cmd.Cmd):
                 object_k = all_objects[key]
                 invalid_attrs = ["id", "created_at", "updated_at"]
                 if object_k:
-                     obj = line.split(" ")
-                     if len(obj) < 3:
+                    obj = line.split(" ")
+                    if len(obj) < 3:
                         print("** attribute name missing **")
-                     elif len(obj) < 4:
-                         print("** value missing **")
-                     elif obj[2] not in invalid_attrs:
-                         object_k.__dict__[obj[2]] = obj[3]
-                         object_k.updated_at = datetime.now()
-                         storage.save()
+                    elif len(obj) < 4:
+                        print("** value missing **")
+                    elif obj[2] not in invalid_attrs:
+                        object_k.__dict__[obj[2]] = obj[3]
+                        object_k.updated_at = datetime.now()
+                        storage.save()
         else:
             print("** class doesn't exist **")
-
 
 
 if __name__ == "__main__":
