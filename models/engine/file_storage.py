@@ -6,7 +6,10 @@ standard representation of a data structure
 
 import json
 from models.base_model import BaseModel
+from models.user import User
 import sys
+
+AppModels = {'BaseModel': BaseModel, 'User': User}
 
 
 class FileStorage():
@@ -46,22 +49,16 @@ class FileStorage():
         """if the json file exists, function deserializes it to __objects
         if file does not exist, nothing should be done, no exception is raised
 
-        remember that value is a dictionary.
-        since sys.module contains all modules in our program, we call it on
-        our file's module, and then extract the names of classes in our
-        value dict
-
-        These names are passed as **kwargs to the new() function which
-        recreates or forms our __objects dict
+        When file is loaded, the class of the key is extracted, and if its
+        say BaseModel, arguments in the key are passed to this model using
+        the **kwargs and this reconstructs our self.__objects
         """
         try:
-            objts = {}
             with open(self.__file_path, 'r') as f:
                 objts = json.load(f)
 
-            for key, value in objts.items():
-                theClass = value.pop("__class__")
-                objtsAttr = getattr(sys.modules[__name__], theClass)
-                self.new(objtsAttr(**value))
+            for key in objts:
+                self.__objects[key] = AppModels[objts[key]['__class__']
+                                                ](**objts[key])
         except FileNotFoundError:
             return
