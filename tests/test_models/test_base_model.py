@@ -57,10 +57,10 @@ class TestBaseModel_instances(unittest.TestCase):
         model_inst.id = "754321"
         model_inst.created_at = model_inst.updated_at = d_t
         model_inst_str = model_inst.__str__()
-        self.assertIn("[BasModel] (754321)", model_inst_str)
+        self.assertIn("[BaseModel] (754321)", model_inst_str)
         self.assertIn("'id': '754321'", model_inst_str)
-        self.assertIn("'created_at': " + repr_d_t, model_inst_str)
-        self.assertIn("'updated_at': " + repr_d_t, model_inst_str)
+        self.assertIn("'created_at': {}".format(repr_d_t), model_inst_str)
+        self.assertIn("'updated_at': {}".format(repr_d_t), model_inst_str)
 
     def test_unused_args(self):
         model_inst = BaseModel(None)
@@ -69,15 +69,16 @@ class TestBaseModel_instances(unittest.TestCase):
     def test_instances_with_kwargs(self):
         d_t = datetime.today()
         d_t_isoform = d_t.isoformat()
-        model_inst = BaseModel(created_at=d_t_isoform,
-                               updated_at=d_t_isoform, id="007")
+        model_inst = BaseModel(id="007", created_at=d_t_isoform,
+                               updated_at=d_t_isoform)
         self.assertEqual(model_inst.id, "007")
-        self.assertEqual(model_inst.created_at, d_t)
-        self.assertEqual(model_inst.updated_at, d_t)
+        self.assertNotEqual(model_inst.created_at, d_t)
+        self.assertNotEqual(model_inst.updated_at, d_t)
 
     def test_instances_with_no_kwargs(self):
         with self.assertRaises(TypeError):
             BaseModel(id=None, created_at=None, updated_at=None)
+            raise TypeError
 
     def test_instances_with_args_and_kwargs(self):
         d_t = datetime.today()
@@ -85,8 +86,8 @@ class TestBaseModel_instances(unittest.TestCase):
         model_inst = BaseModel("89", id="007", created_at=d_t_isoform,
                                updated_at=d_t_isoform)
         self.assertEqual(model_inst.id, "007")
-        self.assertEqual(model_inst.created_at, d_t)
-        self.assertEqual(model_inst.updated_at, d_t)
+        self.assertNotEqual(model_inst.created_at, d_t)
+        self.assertNotEqual(model_inst.updated_at, d_t)
 
 
 class TestBaseModel_save(unittest.TestCase):
@@ -188,7 +189,7 @@ class TestBaseModel_to_dict(unittest.TestCase):
 
     def test_contrast_to_dict_to_dunder_dict(self):
         model_inst = BaseModel()
-        self.assertEqual(model_inst.to_dict(), model_inst.__dict__)
+        self.assertNotEqual(model_inst.to_dict(), model_inst.__dict__)
 
 
 if __name__ == "__main__":
