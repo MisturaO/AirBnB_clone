@@ -7,7 +7,7 @@ from datetime import datetime
 
 class HBNBCommand(cmd.Cmd):
     """The command processor class definition:
-        class attr:
+        class attrs:
             prompt(str): The command prompt"""
 
     prompt = '(hbnb) '
