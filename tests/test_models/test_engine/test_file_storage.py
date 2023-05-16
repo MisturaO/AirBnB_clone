@@ -36,7 +36,7 @@ class testFileStorage(unittest.TestCase):
         are the values stored as dict?
         are the values passed by the instance stored?
         """
-        
+
         keyformat = 'BaseModel' + '.' + self.my_model.id
         self.assertIn(keyformat, self.from_store.keys())
         self.assertIn(self.my_model, self.from_store.values())
