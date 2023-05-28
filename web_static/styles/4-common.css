@@ -1,0 +1,10 @@
+/*
+========================
+Search Button Container
+========================
+*/
+.container {
+    max-width: 1000px;
+    margin: 30px auto;
+    bottom: 30px;
+}
